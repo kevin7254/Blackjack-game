@@ -11,7 +11,7 @@ public class GUI extends JFrame {
 
     public GUI(Deck playerDeck, Deck dealerDeck) {
 
-        //JLabel lbl1 = new JLabel(playerDeck.toString());
+        //JLabel lbl1 = new JLabel(playerDeck.toString()); test
         JTextArea textArea = new JTextArea("Your cards: " + playerDeck.toString());
 
         JTextArea textArea2 = new JTextArea("Dealer cards " + dealerDeck.getCard(0).toString() + ", [Hidden]");
@@ -38,6 +38,7 @@ public class GUI extends JFrame {
         textArea2.setOpaque(false);
         textArea2.setEditable(false);
         this.setVisible(true);
+        System.out.println("test bara");
 
 
     }
