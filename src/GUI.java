@@ -38,6 +38,7 @@ public class GUI extends JFrame {
         textArea2.setOpaque(false);
         textArea2.setEditable(false);
         this.setVisible(true);
+        System.out.println("TEST BOI");
 
 
     }
