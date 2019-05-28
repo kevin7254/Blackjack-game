@@ -4,9 +4,9 @@ import javax.swing.*;
 
 public class GUI extends JFrame {
 
-    Color colorbg = new Color(39,119,20);
+    Color colorbg = new Color(39, 119, 20);
 
-    JButton hit	= new JButton("Hit");
+    JButton hit = new JButton("Hit");
     JButton stay = new JButton("Stay");
 
     public GUI(Deck playerDeck, Deck dealerDeck) {
@@ -24,17 +24,17 @@ public class GUI extends JFrame {
         this.setLayout(null);
 
         //buttons
-        hit.setBounds(400,400,95,30);
+        hit.setBounds(400, 400, 95, 30);
         this.add(hit);
-        stay.setBounds(490,400,95,30);
+        stay.setBounds(490, 400, 95, 30);
         this.add(stay);
         this.add(textArea);
-        textArea.setBounds(440,350,100,100);
+        textArea.setBounds(440, 350, 100, 100);
         textArea.setOpaque(false);
         textArea.setEditable(false);
 
         this.add(textArea2);
-        textArea2.setBounds(100,100,300,300);
+        textArea2.setBounds(100, 100, 300, 300);
         textArea2.setOpaque(false);
         textArea2.setEditable(false);
         this.setVisible(true);
