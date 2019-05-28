@@ -1,22 +1,16 @@
-import java.text.NumberFormat;
 import java.util.Scanner;
-import java.awt.*;
-import java.util.*;
 import javax.swing.*;
+import java.io.FileReader;
 
 /**
- *
  * Ett koncept av hur man kan göra ett simpelt Blackjack-spel som kan fungera både via konsolen och via
  * ett GUI.
  *
  * <p>Finns många möjligheter att utveckla applikationen, exempelvis att föra någon form av statistik, införa
  * olika regler, språk med mera.
  *
- *
- *
  * @author Kevin Nilsson
  * @since 05/15/2019
- *
  */
 public class Blackjack extends JFrame {
 
@@ -36,8 +30,9 @@ public class Blackjack extends JFrame {
         Stats stats = new Stats();
 
         Scanner userInput = new Scanner(System.in);
+        stats.readFile();
 
-        while(stats.getPlayerMoney() > 0) {
+        while (stats.getPlayerMoney() > 0) {
 
             double playerMoney = stats.getPlayerMoney();
 
@@ -54,7 +49,7 @@ public class Blackjack extends JFrame {
             userInput.nextLine();
             double playerBet = stats.getPlayerBet();
 
-            if(playerBet > playerMoney) {
+            if (playerBet > playerMoney) {
                 System.out.println("You only have " + playerMoney + ", please try again.\n");
             }
 
@@ -67,12 +62,12 @@ public class Blackjack extends JFrame {
             //new GUI(playerDeck, dealerDeck);
 
 
-            while(true) {
+            while (true) {
                 System.out.println("Your hand:");
                 System.out.println(playerDeck.toString());
                 System.out.println("\nYou hand is valued at: " + playerDeck.cardsValue());
 
-                if(playerDeck.cardsValue() == 21) {
+                if (playerDeck.cardsValue() == 21) {
                     System.out.println("\nBlackjack!");
                     stats.gameWon(playerBet);
                     endRound = true;
@@ -84,25 +79,25 @@ public class Blackjack extends JFrame {
                 System.out.println("Would you like to (H) Hit or (S) Stand?");
                 String response = userInput.nextLine();
 
-                if((response.equals("H") || response.equals("h") && !endRound)) {
+                if ((response.equals("H") || response.equals("h") && !endRound)) {
                     playerDeck.draw(playingDeck);
-                    System.out.println("You drew: " + playerDeck.getCard(playerDeck.deckSize()-1).toString());
+                    System.out.println("You drew: " + playerDeck.getCard(playerDeck.deckSize() - 1).toString());
 
-                    if(playerDeck.cardsValue() > 21) {
+                    if (playerDeck.cardsValue() > 21) {
                         System.out.println("Bust. You got: " + playerDeck.cardsValue());
                         stats.gameLost(playerBet);
                         endRound = true;
                         break;
                     }
                 }
-                if(response.equals("S") || response.equals("s")) {
+                if (response.equals("S") || response.equals("s")) {
                     System.out.println("You stand.");
                     break;
                 }
             }
             System.out.println("\nDealer cards: " + dealerDeck.toString());
 
-            if(dealerDeck.cardsValue() > playerDeck.cardsValue() && !endRound) {
+            if (dealerDeck.cardsValue() > playerDeck.cardsValue() && !endRound) {
                 System.out.println("\nDealer wins.");
                 stats.gameLost(playerBet);
                 endRound = true;
@@ -112,31 +107,29 @@ public class Blackjack extends JFrame {
               Dealer draws at 16. Stands at 17.
 
              */
-            while(dealerDeck.cardsValue() < 17 && !endRound) {
+            while (dealerDeck.cardsValue() < 17 && !endRound) {
                 dealerDeck.draw(playingDeck);
-                System.out.println("\nDealer draws: " + dealerDeck.getCard(dealerDeck.deckSize()-1).toString());
+                System.out.println("\nDealer draws: " + dealerDeck.getCard(dealerDeck.deckSize() - 1).toString());
             }
 
             System.out.println("\nDealers hand is valued at " + dealerDeck.cardsValue());
 
-            if((dealerDeck.cardsValue() >21) && !endRound) {
+            if ((dealerDeck.cardsValue() > 21) && !endRound) {
                 System.out.println("\nDealer busts! You win!");
                 stats.gameWon(playerBet);
                 endRound = true;
             }
 
-            if((playerDeck.cardsValue() == dealerDeck.cardsValue() ) && !endRound) {
+            if ((playerDeck.cardsValue() == dealerDeck.cardsValue()) && !endRound) {
                 System.out.println("\nPush");
                 stats.setGamesPlayed(1);
                 endRound = true;
             }
 
-            if((playerDeck.cardsValue() > dealerDeck.cardsValue() && !endRound)) {
+            if ((playerDeck.cardsValue() > dealerDeck.cardsValue() && !endRound)) {
                 System.out.println("\nYou win the hand!");
                 stats.gameWon(playerBet);
-            }
-
-            else if(!endRound) {
+            } else if (!endRound) {
                 System.out.println("\nYou lose the hand.");
                 stats.gameLost(playerBet);
             }
@@ -147,7 +140,7 @@ public class Blackjack extends JFrame {
         }
         System.out.println("Game over!");
         System.out.println("\nWin percentage = " + (stats.winPercentage()));
-
+        stats.writeToFile();
         userInput.close();
     }
 

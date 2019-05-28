@@ -1,7 +1,6 @@
 /**
  * @author Kevin Nilsson
  * @since 05/15/2019
- *
  */
 public class Card {
 
@@ -10,8 +9,7 @@ public class Card {
     private Value value;
 
     /**
-     *
-     * @param suit   the suit of the card
+     * @param suit  the suit of the card
      * @param value the number of the card
      */
     public Card(Suit suit, Value value) {
@@ -30,7 +28,6 @@ public class Card {
     }
 
     /**
-     *
      * @return Ger oss suiten + value. Ex " Two of Hearts"
      */
 
