@@ -33,26 +33,27 @@ public class Blackjack extends JFrame {
         Deck playerDeck = new Deck();
         Deck dealerDeck = new Deck();
 
-
-        double playerMoney = 100.00;
-        double totalplays = 0;
-        double playerWins = 0;
+        Stats stats = new Stats();
 
         Scanner userInput = new Scanner(System.in);
 
-        while(playerMoney > 0) {
+        while(stats.getPlayerMoney() > 0) {
+
+            double playerMoney = stats.getPlayerMoney();
 
             boolean endRound = false;
             System.out.println("You have " + playerMoney + " , how much would you like to bet?");
-            double playerBet = 0;
+
             try {
-                playerBet = userInput.nextDouble();
+                stats.setPlayerBet(userInput.nextDouble());
             } catch (Exception e) {
                 e.getMessage();
                 System.out.println("Write a number please.\n");
                 break;
             }
             userInput.nextLine();
+            double playerBet = stats.getPlayerBet();
+
             if(playerBet > playerMoney) {
                 System.out.println("You only have " + playerMoney + ", please try again.\n");
             }
@@ -73,13 +74,10 @@ public class Blackjack extends JFrame {
 
                 if(playerDeck.cardsValue() == 21) {
                     System.out.println("\nBlackjack!");
-                    playerMoney += playerBet;
-                    playerWins += 1;
+                    stats.gameWon(playerBet);
                     endRound = true;
                     break;
                 }
-
-                if(endRound) break;
 
                 System.out.println("\nDealers card: " + dealerDeck.getCard(0).toString() + " and [Hidden]\n"); //TODO: om det är kung skriv (10)
 
@@ -92,7 +90,7 @@ public class Blackjack extends JFrame {
 
                     if(playerDeck.cardsValue() > 21) {
                         System.out.println("Bust. You got: " + playerDeck.cardsValue());
-                        playerMoney -= playerBet;
+                        stats.gameLost(playerBet);
                         endRound = true;
                         break;
                     }
@@ -101,16 +99,12 @@ public class Blackjack extends JFrame {
                     System.out.println("You stand.");
                     break;
                 }
-                else {
-                    System.out.println("Wrong input.");
-                    break;
-                }
             }
             System.out.println("\nDealer cards: " + dealerDeck.toString());
 
             if(dealerDeck.cardsValue() > playerDeck.cardsValue() && !endRound) {
                 System.out.println("\nDealer wins.");
-                playerMoney -= playerBet;
+                stats.gameLost(playerBet);
                 endRound = true;
 
             }
@@ -127,36 +121,32 @@ public class Blackjack extends JFrame {
 
             if((dealerDeck.cardsValue() >21) && !endRound) {
                 System.out.println("\nDealer busts! You win!");
-                playerMoney += playerBet;
-                playerWins += 1;
+                stats.gameWon(playerBet);
                 endRound = true;
             }
 
             if((playerDeck.cardsValue() == dealerDeck.cardsValue() ) && !endRound) {
                 System.out.println("\nPush");
+                stats.setGamesPlayed(1);
                 endRound = true;
             }
 
             if((playerDeck.cardsValue() > dealerDeck.cardsValue() && !endRound)) {
                 System.out.println("\nYou win the hand!");
-                playerMoney += playerBet;
-                playerWins += 1;
-                endRound = true;
+                stats.gameWon(playerBet);
             }
 
             else if(!endRound) {
                 System.out.println("\nYou lose the hand.");
-                playerMoney -= playerBet;
-                endRound = true;
+                stats.gameLost(playerBet);
             }
 
             playerDeck.moveAllToDeck(playingDeck);
             dealerDeck.moveAllToDeck(playingDeck);
             System.out.println("\nEnd of hand.");
-            totalplays += 1;
         }
         System.out.println("Game over!");
-        System.out.println("\nWin percentage = " + (playerWins/totalplays));
+        System.out.println("\nWin percentage = " + (stats.winPercentage()));
 
         userInput.close();
     }
