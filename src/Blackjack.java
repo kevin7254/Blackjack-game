@@ -20,32 +20,9 @@ import javax.swing.*;
  */
 public class Blackjack extends JFrame {
 
-    Color colorbg = new Color(39,119,20);
-
-    JButton hit	= new JButton("Hit");
-    JButton stay = new JButton("Stay");
 
     public Blackjack() {
-        /*
-        JLabel lbl1 = new JLabel("");
 
-        //frame
-        this.setSize(600, 500);
-        this.setTitle("Blackjack");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().setBackground(colorbg);
-        this.setLayout(null);
-
-        //buttons
-        hit.setBounds(400,400,95,30);
-        this.add(hit);
-        stay.setBounds(490,400,95,30);
-        this.add(stay);
-        this.add(lbl1);
-        lbl1.setBounds(300,100,100,100);
-        this.setVisible(true);
-
-         */
     }
 
     public void Game() {
@@ -67,7 +44,14 @@ public class Blackjack extends JFrame {
 
             boolean endRound = false;
             System.out.println("You have " + playerMoney + " , how much would you like to bet?");
-            double playerBet = userInput.nextDouble();
+            double playerBet = 0;
+            try {
+                playerBet = userInput.nextDouble();
+            } catch (Exception e) {
+                e.getMessage();
+                System.out.println("Write a number please.\n");
+                break;
+            }
             userInput.nextLine();
             if(playerBet > playerMoney) {
                 System.out.println("You only have " + playerMoney + ", please try again.\n");
@@ -79,7 +63,7 @@ public class Blackjack extends JFrame {
             dealerDeck.draw(playingDeck);
             dealerDeck.draw(playingDeck);
 
-            new GUI(playerDeck, dealerDeck);
+            //new GUI(playerDeck, dealerDeck);
 
 
             while(true) {
@@ -114,6 +98,11 @@ public class Blackjack extends JFrame {
                     }
                 }
                 if(response.equals("S") || response.equals("s")) {
+                    System.out.println("You stand.");
+                    break;
+                }
+                else {
+                    System.out.println("Wrong input.");
                     break;
                 }
             }
