@@ -14,7 +14,7 @@ public class Card {
      * @param suit   the suit of the card
      * @param value the number of the card
      */
-    Card(Suit suit, Value value) {
+    public Card(Suit suit, Value value) {
 
         this.suit = suit;
         this.value = value;
