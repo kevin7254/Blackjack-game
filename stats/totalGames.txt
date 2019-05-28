@@ -1,0 +1,4 @@
+Total games played: 6.0
+Total games won: 3.0
+Total money betted: 650.0
+Total money won: 250.0
