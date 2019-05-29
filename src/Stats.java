@@ -60,7 +60,7 @@ public class Stats {
         return (this.playerWins / this.gamesPlayed);
     }
 
-    public void writeToFile() { //TODO: fixa all-time stats för resten oxå
+    public void writeToFile() {
         try {
             FileWriter writer = new FileWriter("stats/totalGames.txt");
 

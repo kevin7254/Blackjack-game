@@ -97,8 +97,8 @@ public class Deck {
         int totalValue = 0;
         int aces = 0;
 
-        for (Card aCard : this.cards) {
-            switch (aCard.getValue()) {
+        for (Card playerCard : this.cards) {
+            switch (playerCard.getValue()) {
                 case TVÅ:
                     totalValue += 2;
                     break;
