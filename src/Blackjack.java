@@ -27,6 +27,7 @@ public class Blackjack extends JFrame {
         Deck playerDeck = new Deck();
         Deck dealerDeck = new Deck();
 
+        Rules rules = new Rules(playerDeck, playingDeck, dealerDeck);
         Stats stats = new Stats();
 
         Scanner userInput = new Scanner(System.in);
@@ -67,6 +68,13 @@ public class Blackjack extends JFrame {
                 System.out.println(playerDeck.toString());
                 System.out.println("\nYou hand is valued at: " + playerDeck.cardsValue());
 
+                System.out.println("\nDealers card: " + dealerDeck.getCard(0).toString() + " and [Hidden]\n");
+                if (playerDeck.getCard(0).getValue() == playerDeck.getCard(1).getValue()) {
+                    rules.split(userInput);
+                    endRound = true;
+                    break;
+                }
+
                 if (playerDeck.cardsValue() == 21) {
                     System.out.println("\nBlackjack!");
                     stats.gameWon(playerBet);
@@ -74,7 +82,6 @@ public class Blackjack extends JFrame {
                     break;
                 }
 
-                System.out.println("\nDealers card: " + dealerDeck.getCard(0).toString() + " and [Hidden]\n"); //TODO: om det är kung skriv (10)
 
                 System.out.println("Would you like to (H) Hit or (S) Stand?");
                 String response = userInput.nextLine();
@@ -95,6 +102,11 @@ public class Blackjack extends JFrame {
                     break;
                 }
             }
+
+            if(endRound) {
+                break;
+            }
+
             System.out.println("\nDealer cards: " + dealerDeck.toString());
 
             if (dealerDeck.cardsValue() > playerDeck.cardsValue() && !endRound) {
