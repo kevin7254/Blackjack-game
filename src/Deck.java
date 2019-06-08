@@ -62,6 +62,10 @@ public class Deck {
         return this.cards.get(i);
     }
 
+    public ArrayList getCardArrayList() {
+        return this.cards;
+    }
+
     public Card removeCard(int i) {
         return this.cards.remove(i);
     }

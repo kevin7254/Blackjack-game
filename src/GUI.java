@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.*;
 import javax.swing.*;
 
 public class GUI extends JFrame {
@@ -8,13 +7,17 @@ public class GUI extends JFrame {
 
     JButton hit = new JButton("Hit");
     JButton stay = new JButton("Stay");
+    Deck playingDeck = new Deck();
 
-    public GUI(Deck playerDeck, Deck dealerDeck) {
+    public GUI() {
+
 
         //JLabel lbl1 = new JLabel(playerDeck.toString()); test
+        /*
         JTextArea textArea = new JTextArea("Your cards: " + playerDeck.toString());
 
         JTextArea textArea2 = new JTextArea("Dealer cards " + dealerDeck.getCard(0).toString() + ", [Hidden]");
+        */
 
         //frame
         this.setSize(600, 500);
@@ -23,8 +26,23 @@ public class GUI extends JFrame {
         this.getContentPane().setBackground(colorbg);
         this.setLayout(null);
 
+        JLabel deckLabel = new JLabel();
+
+        deckLabel.setBackground(Color.WHITE);
+        deckLabel.setBounds(40,20, 65, 100);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/res/2D.png"));
+
+        Image img = icon.getImage();
+
+        Image img2 = img.getScaledInstance(deckLabel.getWidth(), deckLabel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i = new ImageIcon(img2);
+        deckLabel.setIcon(i);
+
+        this.add(deckLabel);
+        this.setVisible(true);
+
         //buttons
-        hit.setBounds(400, 400, 95, 30);
+        /*hit.setBounds(400, 400, 95, 30);
         this.add(hit);
         stay.setBounds(490, 400, 95, 30);
         this.add(stay);
@@ -39,6 +57,7 @@ public class GUI extends JFrame {
         textArea2.setEditable(false);
         this.setVisible(true);
         System.out.println("test bara");
+        */
 
 
     }
