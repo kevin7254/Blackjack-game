@@ -30,7 +30,7 @@ public class GUI extends JFrame {
 
         deckLabel.setBackground(Color.WHITE);
         deckLabel.setBounds(40,20, 65, 100);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/res/2D.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/res/2C.png")); //Vilket kort som visas
 
         Image img = icon.getImage();
 
