@@ -65,10 +65,10 @@ public class Blackjack extends JFrame {
 
             while (true) {
                 System.out.println("Your hand:");
-                System.out.println(playerDeck.toString());
+                System.out.println(playerDeck);
                 System.out.println("\nYou hand is valued at: " + playerDeck.cardsValue());
 
-                System.out.println("\nDealers card: " + dealerDeck.getCard(0).toString() + " and [Hidden]\n");
+                System.out.println("\nDealers card: " + dealerDeck.getCard(0) + " and [Hidden]\n");
                 if (playerDeck.getCard(0).getValue() == playerDeck.getCard(1).getValue()) {
                     rules.split(userInput);
                     endRound = true;
@@ -88,7 +88,7 @@ public class Blackjack extends JFrame {
 
                 if ((response.equals("H") || response.equals("h") && !endRound)) {
                     playerDeck.draw(playingDeck);
-                    System.out.println("You drew: " + playerDeck.getCard(playerDeck.deckSize() - 1).toString());
+                    System.out.println("You drew: " + playerDeck.getCard(playerDeck.deckSize() - 1));
 
                     if (playerDeck.cardsValue() > 21) {
                         System.out.println("Bust. You got: " + playerDeck.cardsValue());
@@ -107,7 +107,7 @@ public class Blackjack extends JFrame {
                 break;
             }
 
-            System.out.println("\nDealer cards: " + dealerDeck.toString());
+            System.out.println("\nDealer cards: " + dealerDeck);
 
             if (dealerDeck.cardsValue() > playerDeck.cardsValue() && !endRound) {
                 System.out.println("\nDealer wins.");
@@ -121,7 +121,7 @@ public class Blackjack extends JFrame {
              */
             while (dealerDeck.cardsValue() < 17 && !endRound) {
                 dealerDeck.draw(playingDeck);
-                System.out.println("\nDealer draws: " + dealerDeck.getCard(dealerDeck.deckSize() - 1).toString());
+                System.out.println("\nDealer draws: " + dealerDeck.getCard(dealerDeck.deckSize() - 1));
             }
 
             System.out.println("\nDealers hand is valued at " + dealerDeck.cardsValue());
