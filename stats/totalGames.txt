@@ -1,0 +1,4 @@
+Total games played: 0.0
+Total games won: 0.0
+Total money betted: 0.0
+Total money won: 0.0

@@ -2,10 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- *
  * @author Kevin Nilsson
  * @since 05/15/2019
- *
  */
 public class Deck {
 
@@ -22,7 +20,6 @@ public class Deck {
     }
 
     /**
-     *
      * @param numDecks Antalet kortlekar i spelet.
      * @param shuffled Om kortleken ska vara blandad eller inte.
      */
@@ -100,8 +97,8 @@ public class Deck {
         int totalValue = 0;
         int aces = 0;
 
-        for (Card aCard : this.cards) {
-            switch (aCard.getValue()) {
+        for (Card playerCard : this.cards) {
+            switch (playerCard.getValue()) {
                 case TVÅ:
                     totalValue += 2;
                     break;
